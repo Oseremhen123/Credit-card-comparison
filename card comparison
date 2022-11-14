@@ -1,0 +1,96 @@
+
+import java.util.*;
+
+public class CardComparison{
+    public static final Scanner KEYBOARD = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double monthlyExpenses = monthlyExpenses();
+        double creditCardOne = creditCardOne(monthlyExpenses);
+        double creditCardTwo = creditCardTwo(monthlyExpenses);
+        double compareCards = compareCards(creditCardOne, creditCardTwo);
+        result(compareCards, creditCardOne, creditCardTwo);
+    }
+
+    /**
+     *This method prompts and return monthly expenses
+     *@return monthly expenses
+     */
+    public static double monthlyExpenses() {
+        System.out.print("Enter monthly expenses: ");
+        double monthlyExpenses = KEYBOARD.nextDouble();
+        return monthlyExpenses;
+    }
+    
+    /**
+     *This method prompts user for inputs to calculate
+     * annual fee and points per dollar spent.
+     */
+    public static double creditCardOne(double monthlyExpenses){
+        System.out.println("=== Credit Card 1 Offer");
+        System.out.print("Enter annual fee: ");
+        double annualReward = KEYBOARD.nextDouble();
+        System.out.print("Enter points per dollar spent: ");
+        double pointsPerDollar = KEYBOARD.nextDouble();
+        double rewardOffer = (12 * monthlyExpenses * pointsPerDollar) / 100 - annualReward;
+         if(rewardOffer < 0) {
+            return 0;
+         } else
+         {
+            return rewardOffer;
+         }
+    }
+    
+    /**
+     * Calculates rewardOffer from returned monthlyExpenses.
+     * 
+     */  
+    public static double creditCardTwo(double monthlyExpenses){
+        System.out.println("===================================");
+        System.out.println("=== Credit Card 2 Offer");
+        System.out.print("Enter annual fee: ");
+        double annualReward = KEYBOARD.nextDouble();
+        System.out.print("Enter points per dollar spent: ");
+        double pointsPerDollar = KEYBOARD.nextDouble();
+        System.out.println("===================================");
+        double rewardOffer = (monthlyExpenses * pointsPerDollar*12) / 100 - annualReward;
+        if(rewardOffer < 0){
+            return 0;
+        } else
+        {
+            return rewardOffer;
+        }
+    }
+    
+    /**
+     * This method compares credit cards using if-else statements.
+     */
+    public static double compareCards(double creditCardOne, double creditCardTwo){
+        if (creditCardOne > creditCardTwo) {
+            return 1;
+        }
+        else if(creditCardTwo > creditCardOne){
+            return 2;
+        }
+        else{
+            return 3;
+        }
+    }
+    
+    /**
+     * This method prints results to user.
+     */
+    public static void result(double compareCards, double creditCardOne, double creditCardTwo) {
+        System.out.println("=== Results");
+        System.out.printf("Credit Card 1 annual award dollars = $%.2f\n", creditCardOne);
+        System.out.printf("Credit Card 2 annual award dollars = $%.2f\n", creditCardTwo);
+         if(compareCards != 3.0){
+            System.out.println("We recommend applying for Credit Card " + (int)compareCards + ".");
+         }
+         else{
+            System.out.println("Both cards result in the same total award dollars.");
+         }
+         
+        System.out.println("===================================");
+    }
+}
